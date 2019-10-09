@@ -1,0 +1,52 @@
+.records-inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding-top: 60px;
+
+  @media screen and (min-width: 984px) {
+    padding: 0;
+    margin: 0 auto;
+  }
+}
+
+.records-logo {
+  position: relative;
+  display: block;
+
+  &--wrap {
+    position: relative;
+    width: 145px;
+    margin: 0 auto;
+  }
+}
+
+.records--single {
+  &-container {
+    position: relative;
+    display: block;
+    padding: 54px 16px 0 0;
+  }
+
+  &-item {
+    position: relative;
+    display: block;
+    padding-bottom: 20px;
+  }
+
+  &-image {
+    position: relative;
+    display: block;
+
+    img {
+      position: relative;
+      display: block;
+      width: 100%;
+    }
+  }
+
+  &-info {
+    display: none;
+  }
+}

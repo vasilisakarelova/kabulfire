@@ -1,12 +1,29 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import './index.css'
+import resized from './utils/resized'
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+import App from './App'
+import { unregister } from './serviceWorker'
+
+// import api from './testdb'
+
+// const origin = window.location.origin
+//
+// window.fetch(`${origin}/admin/api`)
+//   .then((response) => {
+//     if (response.status >= 400) {
+//       throw new Error("Bad response from server")
+//     }
+//     return response.json()
+//   })
+//   .then((data) => {
+//     ReactDOM.render(<App data={data} />, document.getElementById('root'))
+//     unregister()
+//     resized()
+//   })
+
+ReactDOM.render(<App />, document.getElementById('root'))
+unregister()
+resized()

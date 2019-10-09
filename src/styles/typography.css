@@ -1,0 +1,21 @@
+@font-face {
+    font-family: 'Visual';
+    src: url('./fonts/visual-regular.woff') format('woff'),
+        url('./fonts/visual-regular.woff2') format('woff2'),
+        url('./fonts/visual-regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.link {
+  color: rgb(0, 0, 255);
+  text-decoration: none;
+
+  &:active,
+  &:hover,
+  &:focus,
+  &:visited {
+    color: rgb(0, 0, 255);
+    text-decoration: none;
+  }
+}

@@ -1,0 +1,23 @@
+.publishing-inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding-top: 60px;
+
+  @media screen and (min-width: 984px) {
+    padding: 0;
+    margin: 0 auto;
+  }
+}
+
+.publishing-logo {
+  position: relative;
+  display: block;
+
+  &--wrap {
+    position: relative;
+    width: 145px;
+    margin: 0 auto;
+  }
+}

@@ -1,0 +1,39 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Visual';
+  font-size: 14px;
+  line-height: 18px;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.root-wrap {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.main-wrap {
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+}
+
+.main-inner {
+  position: absolute;
+  transform: translate(-50%) rotate(-90deg);
+  transform-origin: top center;
+  top: 50%;
+  height: 100vw;
+  width: 100vh;
+  flex-direction: column;
+  display: flex;
+  justify-content: flex-end;
+}
