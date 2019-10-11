@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Router } from 'react-router-dom'
+import { Router, Route } from 'react-router-dom'
 import { createBrowserHistory } from 'history'
 
 import AccordionRoute from './components/AccordionRoute'
@@ -50,13 +50,13 @@ export default class App extends Component {
         <div className='main-wrap'>
           <div className='main-inner'>
             <AccortionLink to="/records">Records</AccortionLink>
-            <AccordionRoute history={this.customHistory} path="/records" component={Records}/>
-            
+            <AccordionRoute history={this.customHistory} exact path="/records" component={Records}/>
+
             <AccortionLink to="/publishing">Publishing</AccortionLink>
             <AccordionRoute history={this.customHistory} path="/publishing" component={Publishing}/>
 
             <AccortionLink to="/deep-fried">Deep Fried</AccortionLink>
-            <AccordionRoute history={this.customHistory} exact path="/deep-fried" component={DeepFried}/>
+            <AccordionRoute history={this.customHistory} path="/deep-fried" component={DeepFried}/>
           </div>
         </div>
       </Router>

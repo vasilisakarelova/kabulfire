@@ -8,15 +8,20 @@ import 'animate.css/source/_base.css'
 import 'animate.css/source/bouncing_entrances/bounceInDown.css'
 
 export default ({component: Component, data, ...rest}) => {
-  const width = window.innerWidth < 984 ? 0 : 200
-  console.log(width)
+  let copy = rest
+  let pathName = rest.path.replace(/\\|\//g,'')
+  if (rest.path === '/records') {
+    copy.path = "/(|records)/"
+    pathName = 'records'
+  }
+
   return (
-    <Route {...rest} children={ ({match}) => {
+    <Route {...copy} children={ ({match}) => {
       return (
         <AnimateHeight duration={ 300 }
           applyInlineTransitions={false}
           height={  match !== null ? 'auto' : 200 }
-          className={`page-wrap is-${rest.path.replace(/\\|\//g,'')}`}
+          className={`page-wrap is-${pathName}`}
           animationStateClasses={{
             animating: 'rah-animating',
             animatingUp: 'rah-animating--up',

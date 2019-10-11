@@ -12,10 +12,20 @@
     transform: translate(-50%) rotate(-90deg);
     transform-origin: top center;
     overflow: hidden;
+
+    @media screen and (min-width: 984px) {
+      width: calc(100vw - 120px - 400px);
+    }
   }
 
   &.is-records {
     background: #000000;
+
+    > div {
+      @media screen and (min-width: 984px) {
+        top: calc(520px - 40px - 20px);
+      }
+    }
   }
 
   &.is-deep-fried {
@@ -36,6 +46,10 @@
 
 .rah-static--height-auto {
   height: calc(100% - 120px) !important;
+
+  @media screen and (min-width: 984px) {
+    height: calc(100% - 400px - 120px) !important;
+  }
 }
 
 .rah-animating--up.rah-animating--to-height-zero {
