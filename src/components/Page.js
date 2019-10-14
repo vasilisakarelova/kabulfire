@@ -6,13 +6,12 @@ import { withRouter } from 'react-router-dom'
 function Page({
   children,
   name,
-  location: {
-    state,
-  },
+  match,
+  pageRef
 }) {
   return (
-    <div className={css('page', { [`page${name}--prev`]: state && state.prev, [`page${name}`]: name !== undefined } )}>
-      <div className='page-inner'>
+    <div className={css('page', {'page-transition-enter-done': match !== null, [`page${name}`]: name !== undefined } )}>
+      <div className='page-inner' ref={pageRef}>
         {children}
       </div>
     </div>

@@ -1,15 +1,27 @@
 .nav--link {
-  position: relative;
+  position: absolute;
   display: block;
-  width: 100%;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
   line-height: 40px;
+  letter-spacing: 0.1em;
   text-align: center;
   text-transform: uppercase;
   text-decoration: none;
   color: inherit;
+  top: 50%;
+  transform: translate(-50%) rotate(-90deg);
+  transform-origin: top center;
+  height: 40px;
+  width: 100vh;
+
+  @media screen and (min-width: 984px) {
+    height: 70px;
+    line-height: 70px;
+    font-size: 32px;
+    letter-spacing: 0.2em;
+  }
 
   &:active,
   &:focus,
@@ -34,7 +46,14 @@
   }
 
   &-wrap {
+    position: relative;
     display: block;
+    width: 40px;
+    height: 100%;
     z-index: 1;
+
+    @media screen and (min-width: 984px) {
+      width: 70px;
+    }
   }
 }

@@ -28,12 +28,40 @@ html, body {
 
 .main-inner {
   position: absolute;
-  transform: translate(-50%) rotate(-90deg);
-  transform-origin: top center;
-  top: 50%;
-  height: 100vw;
-  width: 100vh;
-  flex-direction: column;
+  top: 0;
+  left: 0;
   display: flex;
-  justify-content: flex-end;
+  flex-direction: row;
+  justify-content: stretch;
+  height: 100%;
+  width: 100%;
+}
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding-top: 60px;
+
+  @media screen and (min-width: 984px) {
+    margin: 0 auto;
+    align-items: flex-start;
+  }
+}
+
+.container-logo {
+  position: relative;
+  display: block;
+
+  &--wrap {
+    position: relative;
+    width: 145px;
+    margin: 0 auto;
+
+    @media screen and (min-width: 984px) {
+      width: 175px;
+      margin: 0;
+    }
+  }
 }

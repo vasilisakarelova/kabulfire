@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Router, Route } from 'react-router-dom'
+import Marquee3k from 'marquee3000'
 import { createBrowserHistory } from 'history'
 
 import AccordionRoute from './components/AccordionRoute'
@@ -22,6 +23,20 @@ export default class App extends Component {
     this.customHistory.listen(currentLocation => {
       this.updateRouteState(currentLocation.pathname, prevPath)
       prevPath = currentLocation.pathname
+
+      if (currentLocation.pathname === '/deep-fried') {
+        window.MARQUEES[2].paused = true
+        window.MARQUEES[1].paused = false
+        window.MARQUEES[0].paused = false
+      } else if (currentLocation.pathname === '/publishing') {
+        window.MARQUEES[2].paused = false
+        window.MARQUEES[1].paused = true
+        window.MARQUEES[0].paused = false
+      } else if (currentLocation.pathname === '/records') {
+        window.MARQUEES[2].paused = false
+        window.MARQUEES[2].paused = false
+        window.MARQUEES[0].paused = true
+      }
     });
 
     this.state = {
@@ -33,6 +48,18 @@ export default class App extends Component {
 
   componentDidMount () {
     document.querySelector('.page-inner').style.opacity = 1
+
+    Marquee3k.init({
+      selector: 'marquee3k',
+    })
+
+    if (this.state.location === '/deep-fried') {
+      window.MARQUEES[2].paused = true
+    } else if (this.state.location === '/publishing') {
+      window.MARQUEES[1].paused = true
+    } else if (this.state.location === '/records') {
+      window.MARQUEES[0].paused = true
+    }
   }
 
   updateRouteState (location, prevPath) {

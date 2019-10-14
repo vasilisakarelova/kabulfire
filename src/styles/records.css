@@ -1,53 +1,52 @@
-.records-inner {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
-  padding-top: 60px;
-
-  @media screen and (min-width: 984px) {
-    margin: 0 auto;
-  }
-}
-
-.records-logo {
-  position: relative;
-  display: block;
-
-  &--wrap {
-    position: relative;
-    width: 145px;
-    margin: 0 auto;
-  }
-}
-
 .records--single {
   &-container {
     position: relative;
     display: block;
     padding: 54px 16px 0 0;
+    width: 100%;
+
+    @media screen and (min-width: 984px) {
+      padding: 54px 35px 0 0;
+    }
   }
 
   &-item {
     position: relative;
     display: block;
     padding-bottom: 20px;
+    width: 100%;
   }
 
   &-image {
     position: relative;
     display: block;
+    overflow: hidden;
+    width: 100%;
 
     @media screen and (min-width: 984px) {
       display: inline-block;
       vertical-align: top;
       width: 48.5%;
     }
+  }
+
+  &-image-holder {
+    position: relative;
+    width: 100%;
+    padding-top: 100%;
+    background: linear-gradient(90deg, #f2f2f2 25%, #e6e6e6 37%, #f2f2f2 63%);
+    animation: ant-skeleton-loading 1.4s ease infinite;
+    background-size: 400% 100%;
 
     img {
-      position: relative;
+      position: absolute;
+      top: 0;
+      left: 0;
       display: block;
       width: 100%;
+      opacity: 0;
+      transition: opacity .3s;
+      background: black;
     }
   }
 
@@ -56,11 +55,26 @@
     color: #fff;
     text-transform: uppercase;
 
+    div {
+      position: relative;
+      display: block;
+      padding-bottom: 3px;
+    }
+
     @media screen and (min-width: 984px) {
       width: 48.5%;
       margin-left: 3%;
       display: inline-block;
       vertical-align: top;
     }
+  }
+}
+
+@keyframes ant-skeleton-loading {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
   }
 }

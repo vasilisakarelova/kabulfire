@@ -9,8 +9,8 @@ const AccordtionLink = (props) => {
 
   return (
     <div className={css('nav--link-wrap', [`nav--link-${to}`])}>
-      <Link to={`/${to}`} className='nav--link'>
-        {props.children}
+      <Link to={`/${to}`} className='nav--link marquee3k' data-speed="0.5">
+        <span>{props.children} {props.children} {props.children} {props.children} {props.children} {props.children} {props.children} </span>
       </Link>
     </div>
   );
