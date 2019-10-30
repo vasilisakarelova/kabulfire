@@ -43,6 +43,7 @@ html, body {
   flex-direction: column;
   min-height: 100%;
   padding-top: 60px;
+  padding-bottom: 60px;
 
   @media screen and (min-width: 984px) {
     margin: 0 auto;
@@ -60,8 +61,26 @@ html, body {
     margin: 0 auto;
 
     @media screen and (min-width: 984px) {
-      width: 175px;
+      width: 150px;
       margin: 0;
+      margin-left: 25px;
     }
+  }
+}
+
+.svg-template {
+  display: none;
+}
+
+.Cf {
+  &:before {
+    content: " ";
+    display: table;
+  }
+
+  &:after {
+    content: " ";
+    display: table;
+    clear: both;
   }
 }

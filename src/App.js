@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Router, Route } from 'react-router-dom'
+import { Router } from 'react-router-dom'
 import Marquee3k from 'marquee3000'
 import { createBrowserHistory } from 'history'
 
@@ -9,7 +9,6 @@ import AccortionLink from './components/AccordionLink'
 import Records from './components/Records'
 import DeepFried from './components/DeepFried'
 import Publishing from './components/Publishing'
-import Error404 from './components/Error404'
 
 export default class App extends Component {
   constructor (props) {
@@ -19,7 +18,7 @@ export default class App extends Component {
 
     let prevPath = window.location.pathname
 
-    this.customHistory = createBrowserHistory()
+    this.customHistory = createBrowserHistory({basename: '/getdeveloped'})
     this.customHistory.listen(currentLocation => {
       this.updateRouteState(currentLocation.pathname, prevPath)
       prevPath = currentLocation.pathname
@@ -34,7 +33,7 @@ export default class App extends Component {
         window.MARQUEES[0].paused = false
       } else if (currentLocation.pathname === '/records') {
         window.MARQUEES[2].paused = false
-        window.MARQUEES[2].paused = false
+        window.MARQUEES[1].paused = false
         window.MARQUEES[0].paused = true
       }
     });
@@ -57,7 +56,7 @@ export default class App extends Component {
       window.MARQUEES[2].paused = true
     } else if (this.state.location === '/publishing') {
       window.MARQUEES[1].paused = true
-    } else if (this.state.location === '/records') {
+    } else if (this.state.location === '/records' || this.state.location === '/') {
       window.MARQUEES[0].paused = true
     }
   }
@@ -76,13 +75,13 @@ export default class App extends Component {
       <Router history={this.customHistory} forceRefresh={!supportsHistory}>
         <div className='main-wrap'>
           <div className='main-inner'>
-            <AccortionLink to="/records">Records</AccortionLink>
+            <AccortionLink currentPath={this.state.location} to="/records">Records</AccortionLink>
             <AccordionRoute history={this.customHistory} exact path="/records" component={Records}/>
 
-            <AccortionLink to="/publishing">Publishing</AccortionLink>
+            <AccortionLink currentPath={this.state.location} to="/publishing">Publishing</AccortionLink>
             <AccordionRoute history={this.customHistory} path="/publishing" component={Publishing}/>
 
-            <AccortionLink to="/deep-fried">Deep Fried</AccortionLink>
+            <AccortionLink currentPath={this.state.location} to="/deep-fried">Deep Fried</AccortionLink>
             <AccordionRoute history={this.customHistory} path="/deep-fried" component={DeepFried}/>
           </div>
         </div>

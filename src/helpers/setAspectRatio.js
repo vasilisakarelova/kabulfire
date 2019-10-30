@@ -9,5 +9,10 @@ export default (img,parent) => {
     }
   }
 
+  if (img.getBoundingClientRect().top <= window.innerHeight * .8) {
+    img.style.opacity = 1
+    parent.removeEventListener('scroll', revealImg)
+  }
+  
   parent.addEventListener('scroll', revealImg)
 }

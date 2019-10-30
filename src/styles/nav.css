@@ -30,6 +30,25 @@
     text-decoration: none;
   }
 
+  &-pseudo {
+    display: none;
+
+    &.is-inactive {
+      display: none;
+      visibility: hidden;
+    }
+
+    @media screen and (min-width: 984px) {
+      position: absolute;
+      display: block;
+      top: 0;
+      left: 70px;
+      width: 100px;
+      height: 100vh;
+      transition: all .4s ease-in-out;
+    }
+  }
+
   &-deep-fried {
     background-color: #07532E;
     color: #fff;
@@ -54,6 +73,16 @@
 
     @media screen and (min-width: 984px) {
       width: 70px;
+
+      &:hover {
+        + .page:not(.page-transition-enter-done) {
+          width: 150px;
+        }
+
+        .nav--link-pseudo {
+          width: 150px;
+        }
+      }
     }
   }
 }

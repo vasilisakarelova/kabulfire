@@ -23,22 +23,32 @@ export default class extends Component {
           </div>
           <div className='deep-fried--moto'>
             <p>Beats crispy like fried chicken. Deep fried is a producer collective from Hamburg reaching out to Music makers around the world.</p>
+            <p>SUBMISSIONS: <a href="mailto:info@kabulfire.com">INFO(AT)KABULFIRE.COM</a>. DROPBOX/SOUNDCLOUD LINKS. NO ATTACHEMENTS</p>
           </div>
           <div className='deep-fried--media-container'>
             <div className='deep-fried--media-block'>
               <div className='deep-fried--media-placeholder'>
                 <img src={img01} alt='deep fried cover' onLoad={ev => setAspectRatio(ev.currentTarget, this.pageRef)}/>
+                <div className='deep-fried--media-play-btn'>
+                  <svg width="100%" height="100%" viewBox="0 0 138 139" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="69" cy="69.8276" r="66" stroke="white" fill="transparent" strokeWidth="6"/>
+                    <path d="M53.5 42.9808L100 69.8276L53.5 96.6744L53.5 42.9808Z" stroke="white" fill="transparent" strokeWidth="5"/>
+                  </svg>
+                </div>
               </div>
+              <div className='deep-fried--media-name'>video title name</div>
             </div>
             <div className='deep-fried--media-block'>
               <div className='deep-fried--media-placeholder'>
                 <img src={img02} alt='deep fried cover' onLoad={ev => setAspectRatio(ev.currentTarget, this.pageRef)}/>
               </div>
+              <div className='deep-fried--media-name'>video title name</div>
             </div>
             <div className='deep-fried--media-block'>
               <div className='deep-fried--media-placeholder'>
                 <img src={img03} alt='deep fried cover' onLoad={ev => setAspectRatio(ev.currentTarget, this.pageRef)}/>
               </div>
+              <div className='deep-fried--media-name'>video title name</div>
             </div>
           </div>
         </div>

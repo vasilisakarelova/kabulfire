@@ -6,11 +6,15 @@
   flex-grow: 0.001;
   flex-shrink: 1;
   flex-basis: auto;
-  transition: all .3s linear;
+  transition: all .4s ease-in-out;
 
   @media screen and (min-width: 984px) {
-    width: 200px;
-    max-width: calc(100vw - 210px - 400px);
+    width: 100px;
+    max-width: calc(100vw - 210px - 200px);
+
+    &:hover:not(.page-transition-enter-done) {
+      width: 150px;
+    }
   }
 }
 
@@ -41,7 +45,7 @@
   -webkit-overflow-scrolling: touch;
 
   @media screen and (min-width: 984px) {
-    width: calc(100vw - 210px - 400px + 20px);
+    width: calc(100vw - 210px - 200px + 20px);
   }
 }
 

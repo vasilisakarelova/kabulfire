@@ -20,7 +20,7 @@
 
     @media screen and (min-width: 984px) {
       flex-wrap: nowrap;
-      justify-content: space-between;
+      justify-content: flex-start;
       overflow: auto;
       padding: 54px 35px 30px 0;
     }
@@ -32,6 +32,7 @@
     width: 48%;
     text-align: center;
     padding-bottom: 15px;
+    cursor: pointer;
 
     @media screen and (min-width: 984px) {
       width: auto;
@@ -49,8 +50,8 @@
     margin: 0 auto;
 
     @media screen and (min-width: 984px) {
-      width: 150px;
-      height: 150px;
+      width: 120px;
+      height: 120px;
     }
 
     img {
@@ -97,6 +98,14 @@
     width: 100%;
     padding-top: 100%;
 
+    @media screen and (min-width: 984px) {
+      display: inline-block;
+      width: 31.5%;
+      padding-top: 31.5%;
+      float: left;
+      margin-right: 3%;
+    }
+
     img {
       position: absolute;
       display: block;
@@ -112,14 +121,23 @@
     position: relative;
     display: block;
     padding-top: 5px;
+
+    @media screen and (min-width: 984px) {
+      padding-top: 0;
+    }
   }
 
   &-end {
     position: relative;
     display: block;
     padding: 15px 0;
-    margin: 0 auto;
     width: 73px;
+    margin: 0 auto;
+
+    @media screen and (min-width: 984px) {
+      padding: 70px 0 60px;
+      width: 250px;
+    }
 
     svg {
       position: relative;
@@ -131,6 +149,7 @@
     font-size: 18px;
     line-height: 22px;
     margin: 0;
+    text-transform: uppercase;
 
     @media screen and (min-width: 984px) {
       font-size: 40px;

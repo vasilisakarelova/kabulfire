@@ -1,8 +1,8 @@
 @font-face {
     font-family: 'Visual';
-    src: url('./fonts/visual-regular.woff') format('woff'),
-        url('./fonts/visual-regular.woff2') format('woff2'),
-        url('./fonts/visual-regular.ttf') format('truetype');
+    src: url('./fonts/Visual-Regular.woff') format('woff'),
+        url('./fonts/Visual-Regular.woff2') format('woff2'),
+        url('./fonts/Visual-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }

@@ -12,6 +12,6 @@ export default (distance, duration) => {
     window.scrollTo(0, baseY + difference * Math.cos(normalizedTime * Math.PI))
     if (normalizedTime < 1) window.requestAnimationFrame(step)
   }
-  
+
   window.requestAnimationFrame(step)
 }
