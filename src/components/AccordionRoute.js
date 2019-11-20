@@ -19,7 +19,7 @@ export default ({component: Component, data, ...rest}) => {
           appear
           classNames="page-transition"
         >
-          <Component data={data} match={match} />
+          <Component data={data} match={match} {...rest} />
         </CSSTransition>
       )
     }}>

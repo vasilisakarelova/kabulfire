@@ -36,12 +36,19 @@ export default class App extends Component {
         window.MARQUEES[1].paused = false
         window.MARQUEES[0].paused = true
       }
+
+      if (this.state.showClickHint) {
+        this.setState({
+          showClickHint: false
+        })
+      }
     });
 
     this.state = {
       documentHasFocus: document.hasFocus(),
       location: this.customHistory.location.pathname,
-      prevPath
+      prevPath,
+      showClickHint: true
     }
   }
 
@@ -70,19 +77,20 @@ export default class App extends Component {
 
   render () {
     const supportsHistory = 'pushState' in window.history
+    const { records, records_intro, legal_info, publishings, publishings_intro, deepFried, deepFried_intro } = this.props.data
 
     return (
       <Router history={this.customHistory} forceRefresh={!supportsHistory}>
         <div className='main-wrap'>
           <div className='main-inner'>
             <AccortionLink currentPath={this.state.location} to="/records">Records</AccortionLink>
-            <AccordionRoute history={this.customHistory} exact path="/records" component={Records}/>
+            <AccordionRoute history={this.customHistory} exact path="/records" component={Records} data={records} intro={records_intro} legal={legal_info} showClickHint={this.state.showClickHint} />
 
             <AccortionLink currentPath={this.state.location} to="/publishing">Publishing</AccortionLink>
-            <AccordionRoute history={this.customHistory} path="/publishing" component={Publishing}/>
+            <AccordionRoute history={this.customHistory} path="/publishing" component={Publishing} data={publishings} intro={publishings_intro} />
 
             <AccortionLink currentPath={this.state.location} to="/deep-fried">Deep Fried</AccortionLink>
-            <AccordionRoute history={this.customHistory} path="/deep-fried" component={DeepFried}/>
+            <AccordionRoute history={this.customHistory} path="/deep-fried" component={DeepFried} data={deepFried} intro={deepFried_intro} />
           </div>
         </div>
       </Router>
