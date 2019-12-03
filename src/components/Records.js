@@ -123,15 +123,32 @@ export default class extends Component {
                       <div className='records--single-artist'>{album.name}</div>
                       <div className='records--single-album'>{album.album}</div>
                       <div className='records--single-year'>{album.year}</div>
-                      <div className='records--single-soundcloud'><a className="records--single-link" href={album.soundcloud} target="_blank" rel="noopener noreferrer">listen</a></div>
-                      <div className='records--single-socials-wrap'>
-                        <div className='records--single-socials'>
-                          <a className="records--single-link" href={album.instagram} target="_blank" rel="noopener noreferrer">
-                            <svg width="19" height="19" viewBox="0 0 19 19">
-                              <use xlinkHref="#instagram" />
-                            </svg>
-                          </a>
+                      { album.soundcloud !== '' &&
+                        <div className='records--single-soundcloud'>
+                          <a className="records--single-link" href={album.soundcloud} target="_blank" rel="noopener noreferrer">listen here</a>
                         </div>
+                      }
+                      <div className='records--single-socials-wrap'>
+                        { album.instagram !== '' &&
+                          <div className='records--single-socials'>
+                            <a className="records--single-link" href={album.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
+                          </div>
+                        }
+                        { album.facebook !== '' &&
+                          <div className='records--single-socials'>
+                            <a className="records--single-link" href={album.facebook} target="_blank" rel="noopener noreferrer"> Facebook</a>
+                          </div>
+                        }
+                        { album.artwork !== '' &&
+                          <div className='records--single-socials'>
+                            <a className="records--single-link" href={album.artwork} target="_blank" rel="noopener noreferrer"> Artwork</a>
+                          </div>
+                        }
+                        { album.video !== '' &&
+                          <div className='records--single-socials'>
+                            <a className="records--single-link" href={album.video} target="_blank" rel="noopener noreferrer"> Video</a>
+                          </div>
+                        }
                       </div>
                     </div>
                   </div>

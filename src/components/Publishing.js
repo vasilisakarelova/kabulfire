@@ -15,9 +15,7 @@ export default class extends Component {
         var id = hintSubMenuLink.getAttribute('href')
         var target = document.querySelector(id)
 
-        $(this.pageRef).animate({
-          scrollTop: target.getBoundingClientRect().top + this.pageRef.scrollTop
-        }, 1000)
+        this.pageRef.scrollTop = target.getBoundingClientRect().top + this.pageRef.scrollTop - 35
       })
     })
   }
@@ -50,19 +48,23 @@ export default class extends Component {
             </svg>
           </div>
           <div className='container--moto is-black' dangerouslySetInnerHTML={{ __html: intro }}></div>
-          <div className='publishing--faces-wrap'>
-            <div className='publishing--faces-scroll'>
-              { artists.map((artist, artistIdx) => {
-                  return (
-                    <div className='publishing--faces-single' href={`#${artist.name.toLowerCase().replace(/\s/g, '')}`} key={artistIdx}>
-                      <div className='publishing--faces-single-img'>
-                        <img src={artist.facesmall} alt='publishing placeholder' onLoad={ev => setAspectRatio(ev.currentTarget, this.pageRef)} />
-                      </div>
-                      <div className='publishing--faces-single-name'>{artist.name}</div>
-                    </div>
-                  )
-                })
-              }
+          <div className='publishing--faces'>
+            <div className='publishing--faces-wrap'>
+              <div className='publishing--faces-inner'>
+                <div className='publishing--faces-scroll'>
+                  { artists.map((artist, artistIdx) => {
+                      return (
+                        <div className='publishing--faces-single' href={`#${artist.name.toLowerCase().replace(/\s/g, '')}`} key={artistIdx}>
+                          <div className='publishing--faces-single-img'>
+                            <img src={artist.facesmall} alt='publishing placeholder' onLoad={ev => setAspectRatio(ev.currentTarget, this.pageRef)} />
+                          </div>
+                          <div className='publishing--faces-single-name'>{artist.name}</div>
+                        </div>
+                      )
+                    })
+                  }
+                </div>
+              </div>
             </div>
           </div>
           <div className='publishing--articles'>

@@ -107,15 +107,13 @@
       margin-top: 0px;
       text-align: left;
     }
-  }
 
-  &-socials-wrap {
-    height: 28px;
-
-    @media screen and (min-width: 984px) {
-      height: 40px;
+    .records--single-link {
+      animation: blink .6s step-start 0s infinite;
     }
   }
+
+  &-socials-wrap {}
 
   &-socials {
     position: relative;
@@ -123,6 +121,11 @@
     height: 28px;
     align-items: center;
     justify-content: center;
+    border-bottom: 1px solid #fff;
+
+    &:last-of-type {
+      border-bottom: none;
+    }
 
     @media screen and (min-width: 984px) {
       height: 40px;
@@ -165,6 +168,7 @@
   display: block;
   color: inherit;
   text-decoration: none;
+  padding-right: 10px;
 
   svg {
     position: relative;
@@ -328,5 +332,11 @@
         width: 70%;
       }
     }
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.0;
   }
 }
