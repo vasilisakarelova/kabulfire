@@ -13,6 +13,7 @@ export default class extends Component {
 
   handlePlay = (mediaIdx) => {
     this[`plyr-${mediaIdx}`].play()
+    this[`plyr-${mediaIdx}`].player.embed.a.style.display = 'block'
 
     this.setState( state => {
       const list = [...state.isPlaying, mediaIdx]
@@ -23,17 +24,30 @@ export default class extends Component {
     })
   }
 
-   onEndPlay = (mediaIdx) => {
-     const index = this.state.isPlaying.indexOf(mediaIdx)
+  onEndPlay = (mediaIdx) => {
+    const index = this.state.isPlaying.indexOf(mediaIdx)
+    this[`plyr-${mediaIdx}`].player.embed.a.style.display = 'none'
 
-     this.setState( state => {
-       const list = [...state.isPlaying.slice(0, index), ...state.isPlaying.slice(index + 1)]
+    this.setState( state => {
+      const list = [...state.isPlaying.slice(0, index), ...state.isPlaying.slice(index + 1)]
+      console.log(list)
+      return {
+        isPlaying: list
+      }
+    })
+  }
 
-       return {
-         isPlaying: list
-       }
-     })
-   }
+  stopAll = () => {
+    this.state.isPlaying.map(id => {
+      this[`plyr-${id}`].pause()
+    })
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if(!prevProps.closeAll && this.props.closeAll) {
+      this.stopAll()
+    }
+  }
 
   render () {
     const { data: medias, intro } = this.props
@@ -63,7 +77,8 @@ export default class extends Component {
                           ref={plyr => this[`plyr-${mediaIdx}`] = plyr}
                           videoId={media[type]}
                           hideControls={true}
-                          clickToPlay
+                          clickToPlay={true}
+                          fullscreen={{ enabled: false }}
                           tooltips={{ controls: false, seek: false }}
                           onPause={() => this.onEndPlay(mediaIdx)}
                           onEnd={() => this.onEndPlay(mediaIdx)}

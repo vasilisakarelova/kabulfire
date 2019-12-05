@@ -27,14 +27,23 @@ export default class App extends Component {
         window.MARQUEES[2].paused = true
         window.MARQUEES[1].paused = false
         window.MARQUEES[0].paused = false
+        this.setState({
+          closeAll: false
+        })
       } else if (currentLocation.pathname === '/publishing') {
         window.MARQUEES[2].paused = false
         window.MARQUEES[1].paused = true
         window.MARQUEES[0].paused = false
+        this.setState({
+          closeAll: true
+        })
       } else if (currentLocation.pathname === '/records') {
         window.MARQUEES[2].paused = false
         window.MARQUEES[1].paused = false
         window.MARQUEES[0].paused = true
+        this.setState({
+          closeAll: true
+        })
       }
 
       if (this.state.showClickHint) {
@@ -48,7 +57,8 @@ export default class App extends Component {
       documentHasFocus: document.hasFocus(),
       location: this.customHistory.location.pathname,
       prevPath,
-      showClickHint: true
+      showClickHint: true,
+      closeAll: false
     }
   }
 
@@ -90,7 +100,7 @@ export default class App extends Component {
             <AccordionRoute history={this.customHistory} path="/publishing" component={Publishing} data={publishings} intro={publishings_intro} />
 
             <AccortionLink currentPath={this.state.location} to="/deep-fried">Deep Fried</AccortionLink>
-            <AccordionRoute history={this.customHistory} path="/deep-fried" component={DeepFried} data={deepFried} intro={deepFried_intro} />
+            <AccordionRoute history={this.customHistory} closeAll={this.state.closeAll} path="/deep-fried" component={DeepFried} data={deepFried} intro={deepFried_intro} />
           </div>
         </div>
       </Router>

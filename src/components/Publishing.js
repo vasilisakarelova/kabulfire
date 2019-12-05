@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import {Helmet} from "react-helmet"
 import Page from './Page'
-import $ from 'jquery'
 
 import setAspectRatio from '../helpers/setAspectRatio'
 

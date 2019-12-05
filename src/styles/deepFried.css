@@ -6,11 +6,11 @@
   &-container {
     position: relative;
     display: block;
-    padding: 27px 16px 0 0;
+    padding: 60px 16px 0 0;
     width: 100%;
 
     @media screen and (min-width: 984px) {
-      padding: 27px 35px 0 0;
+      padding: 100px 35px 0 0;
     }
   }
 
@@ -54,6 +54,7 @@
     cursor: pointer;
     width: 25%;
     max-width: 80px;
+    z-index: 2;
 
     @media screen and (min-width: 984px) {
       width: 140px;

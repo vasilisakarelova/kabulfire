@@ -130,8 +130,24 @@ html, body {
 .plyr__controls,
 .ytp-chrome-top,
 .ytp-watermark,
-.ytp-large-play-button {
+.ytp-large-play-button,
+.ytp-show-cards-title,
+.ytp-gradient-top,
+.ytp-button {
   display: none !important;
+}
+
+.plyr__video-embed iframe {
+  display: none;
+  z-index: 2;
+}
+
+.plyr--video {
+  z-index: 1;
+}
+
+.plyr--paused.plyr__poster-enabled .plyr__poster {
+  opacity: 1;
 }
 
 .hint {
