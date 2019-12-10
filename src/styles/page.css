@@ -16,6 +16,12 @@
       width: 150px;
     }
   }
+
+  &:not(.page-transition-enter-done) {
+    .publishing--faces {
+      z-index: 0;
+    }
+  }
 }
 
 .page-transition-enter-done,

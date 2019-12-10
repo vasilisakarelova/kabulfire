@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Router } from 'react-router-dom'
+import { Router,Route } from 'react-router-dom'
 import Marquee3k from 'marquee3000'
 import { createBrowserHistory } from 'history'
+import * as css from 'classnames'
 
 import AccordionRoute from './components/AccordionRoute'
 import AccortionLink from './components/AccordionLink'
@@ -17,8 +18,17 @@ export default class App extends Component {
     this.updateRouteState = this.updateRouteState.bind(this)
 
     let prevPath = window.location.pathname
+    let isError = true
 
-    this.customHistory = createBrowserHistory({basename: '/getdeveloped'})
+    this.customHistory = createBrowserHistory() //createBrowserHistory({basename: '/getdeveloped'})
+
+    if (this.customHistory.location.pathname === '/'
+      || this.customHistory.location.pathname === '/records'
+      || this.customHistory.location.pathname === '/publishing'
+      || this.customHistory.location.pathname === '/deep-fried') {
+        isError = false
+      }
+
     this.customHistory.listen(currentLocation => {
       this.updateRouteState(currentLocation.pathname, prevPath)
       prevPath = currentLocation.pathname
@@ -27,14 +37,26 @@ export default class App extends Component {
         window.MARQUEES[2].paused = true
         window.MARQUEES[1].paused = false
         window.MARQUEES[0].paused = false
+        this.setState({
+          closeAll: false,
+          isError: false
+        })
       } else if (currentLocation.pathname === '/publishing') {
         window.MARQUEES[2].paused = false
         window.MARQUEES[1].paused = true
         window.MARQUEES[0].paused = false
+        this.setState({
+          closeAll: true,
+          isError: false
+        })
       } else if (currentLocation.pathname === '/records') {
         window.MARQUEES[2].paused = false
         window.MARQUEES[1].paused = false
         window.MARQUEES[0].paused = true
+        this.setState({
+          closeAll: true,
+          isError: false
+        })
       }
 
       if (this.state.showClickHint) {
@@ -48,11 +70,23 @@ export default class App extends Component {
       documentHasFocus: document.hasFocus(),
       location: this.customHistory.location.pathname,
       prevPath,
-      showClickHint: true
+      isError,
+      showClickHint: true,
+      closeAll: false
     }
   }
 
   componentDidMount () {
+    if (this.customHistory.location.pathname !== '/records'
+      && this.customHistory.location.pathname !== '/publishing'
+      && this.customHistory.location.pathname !== '/deep-fried'
+      && this.customHistory.location.pathname !== '/') {
+        this.customHistory.push('/')
+        this.setState({
+          isError: false
+        })
+      }
+
     document.querySelector('.page-inner').style.opacity = 1
 
     Marquee3k.init({
@@ -82,7 +116,7 @@ export default class App extends Component {
     return (
       <Router history={this.customHistory} forceRefresh={!supportsHistory}>
         <div className='main-wrap'>
-          <div className='main-inner'>
+          <div className={css('main-inner', {'is-error': this.state.isError})}>
             <AccortionLink currentPath={this.state.location} to="/records">Records</AccortionLink>
             <AccordionRoute history={this.customHistory} exact path="/records" component={Records} data={records} intro={records_intro} legal={legal_info} showClickHint={this.state.showClickHint} />
 
@@ -90,7 +124,7 @@ export default class App extends Component {
             <AccordionRoute history={this.customHistory} path="/publishing" component={Publishing} data={publishings} intro={publishings_intro} />
 
             <AccortionLink currentPath={this.state.location} to="/deep-fried">Deep Fried</AccortionLink>
-            <AccordionRoute history={this.customHistory} path="/deep-fried" component={DeepFried} data={deepFried} intro={deepFried_intro} />
+            <AccordionRoute history={this.customHistory} closeAll={this.state.closeAll} path="/deep-fried" component={DeepFried} data={deepFried} intro={deepFried_intro} />
           </div>
         </div>
       </Router>

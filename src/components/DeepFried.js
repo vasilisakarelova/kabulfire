@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Suspense, lazy } from 'react'
 import {Helmet} from "react-helmet"
 import Page from './Page'
 import Plyr from 'react-plyr'
@@ -6,34 +6,25 @@ import * as css from 'classnames'
 
 import setAspectRatio from '../helpers/setAspectRatio'
 
+const DeepFriedVideo = lazy(() => import('./DeepFriedVideo'))
+
 export default class extends Component {
   state = {
-    isPlaying: []
+    isPlaying: [],
+    loaded: []
   }
 
-  handlePlay = (mediaIdx) => {
-    this[`plyr-${mediaIdx}`].play()
-
-    this.setState( state => {
-      const list = [...state.isPlaying, mediaIdx]
-
-      return {
-        isPlaying: list
-      }
+  stopAll = () => {
+    this.setState({
+      forceStop: true
     })
   }
 
-   onEndPlay = (mediaIdx) => {
-     const index = this.state.isPlaying.indexOf(mediaIdx)
-
-     this.setState( state => {
-       const list = [...state.isPlaying.slice(0, index), ...state.isPlaying.slice(index + 1)]
-
-       return {
-         isPlaying: list
-       }
-     })
-   }
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if(!prevProps.closeAll && this.props.closeAll) {
+      this.stopAll()
+    }
+  }
 
   render () {
     const { data: medias, intro } = this.props
@@ -56,30 +47,9 @@ export default class extends Component {
 
                 if (type == 'video') {
                   return (
-                    <div className='deep-fried--media-block' key={`deep-fried-${mediaIdx}`}>
-                      <div className='deep-fried--media-name'>{media.title}</div>
-                      <div className='deep-fried--media-placeholder is-video'>
-                        <Plyr
-                          ref={plyr => this[`plyr-${mediaIdx}`] = plyr}
-                          videoId={media[type]}
-                          hideControls={true}
-                          clickToPlay
-                          tooltips={{ controls: false, seek: false }}
-                          onPause={() => this.onEndPlay(mediaIdx)}
-                          onEnd={() => this.onEndPlay(mediaIdx)}
-                          urls={{
-                            youtube: {
-                              api: 'https://noembed.com/embed?url=https://www.youtube.com/watch?v={0}'
-                            }
-                          }} />
-                        <div className={css('deep-fried--media-play-btn', {'is-hidden': this.state.isPlaying.indexOf(mediaIdx) > -1})} onClick={ev => this.handlePlay(mediaIdx)}>
-                          <svg width="100%" height="100%" viewBox="0 0 138 139" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="69" cy="69.8276" r="66" stroke="white" fill="transparent" strokeWidth="6"/>
-                            <path d="M53.5 42.9808L100 69.8276L53.5 96.6744L53.5 42.9808Z" stroke="white" fill="transparent" strokeWidth="5"/>
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
+                    <Suspense fallback={<div className='loader'></div>} key={`deep-fried-${mediaIdx}`}>
+                      <DeepFriedVideo stopAll={this.state.forceStop} type={type} media={media} mediaIdx={mediaIdx} plyrRef={plyr => this[`plyr-wrap-${mediaIdx}`] = plyr} />
+                    </Suspense>
                   )
                 } else if (type == 'image') {
                   return (

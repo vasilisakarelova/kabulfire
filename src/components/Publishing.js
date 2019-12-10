@@ -1,7 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component, Suspense } from 'react'
 import {Helmet} from "react-helmet"
 import Page from './Page'
-import $ from 'jquery'
 
 import setAspectRatio from '../helpers/setAspectRatio'
 
@@ -15,7 +14,7 @@ export default class extends Component {
         var id = hintSubMenuLink.getAttribute('href')
         var target = document.querySelector(id)
 
-        this.pageRef.scrollTop = target.getBoundingClientRect().top + this.pageRef.scrollTop - 35
+        this.pageRef.scrollTop = target.getBoundingClientRect().top + this.pageRef.scrollTop - 35 - this.refs.faces.offsetHeight
       })
     })
   }
@@ -48,7 +47,7 @@ export default class extends Component {
             </svg>
           </div>
           <div className='container--moto is-black' dangerouslySetInnerHTML={{ __html: intro }}></div>
-          <div className='publishing--faces'>
+          <div className='publishing--faces' ref='faces'>
             <div className='publishing--faces-wrap'>
               <div className='publishing--faces-inner'>
                 <div className='publishing--faces-scroll'>
@@ -70,20 +69,22 @@ export default class extends Component {
           <div className='publishing--articles'>
             { artists.map((artist, artistIdx) => {
                 return (
-                  <div className='publishing--articles-block Cf' id={artist.name.toLowerCase().replace(/\s/g, '')} key={artistIdx}>
-                    <div className='publishing--articles-img'>
-                      <img src={artist.coversmall} alt='publishing placeholder' onLoad={ev => setAspectRatio(ev.currentTarget, this.pageRef)} />
+                  <Suspense fallback={<div className='loader'></div>} key={`publishing-artist-${artistIdx}`}>
+                    <div className='publishing--articles-block Cf' id={artist.name.toLowerCase().replace(/\s/g, '')}>
+                      <div className='publishing--articles-img'>
+                        <img src={artist.coversmall} alt='publishing placeholder' onLoad={ev => setAspectRatio(ev.currentTarget, this.pageRef)} />
+                      </div>
+                      <div className='publishing--articles-text Cf'>
+                        <h1>{artist.name}</h1>
+                        <div dangerouslySetInnerHTML={{ __html: artist.text}}></div>
+                      </div>
+                      <div className='publishing--articles-end'>
+                        <svg width="100%" height="100%" viewBox="0 0 73 10">
+                          <use xlinkHref="#end" />
+                        </svg>
+                      </div>
                     </div>
-                    <div className='publishing--articles-text Cf'>
-                      <h1>{artist.name}</h1>
-                      <div dangerouslySetInnerHTML={{ __html: artist.text}}></div>
-                    </div>
-                    <div className='publishing--articles-end'>
-                      <svg width="100%" height="100%" viewBox="0 0 73 10">
-                        <use xlinkHref="#end" />
-                      </svg>
-                    </div>
-                  </div>
+                  </Suspense>
                 )
               })
             }
