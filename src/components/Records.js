@@ -126,7 +126,14 @@ export default class extends Component {
                         <div className='records--single-year'>{album.year}</div>
                         { album.soundcloud !== '' &&
                           <div className='records--single-soundcloud'>
-                            <a className="records--single-link" href={album.soundcloud} target="_blank" rel="noopener noreferrer">listen here</a>
+                            <a className="records--single-link" href={album.soundcloud} target="_blank" rel="noopener noreferrer">
+                              listen here
+                              <span className="records--single-link-arrow">
+                                <svg width="100%" height="100%" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M4.69506 12.6767C4.38264 12.9892 4.38264 13.4957 4.69506 13.8081C5.00748 14.1205 5.51401 14.1205 5.82643 13.8081L4.69506 12.6767ZM14.546 4.75715C14.546 4.31532 14.1879 3.95715 13.746 3.95715H6.54602C6.1042 3.95715 5.74602 4.31532 5.74602 4.75715C5.74602 5.19898 6.1042 5.55715 6.54602 5.55715L12.946 5.55715L12.946 11.9572C12.946 12.399 13.3042 12.7572 13.746 12.7572C14.1879 12.7572 14.546 12.399 14.546 11.9572L14.546 4.75715ZM5.82643 13.8081L14.3117 5.32284L13.1803 4.19147L4.69506 12.6767L5.82643 13.8081Z" fill="white"/>
+                                </svg>
+                              </span>
+                            </a>
                           </div>
                         }
                         <div className='records--single-socials-wrap'>

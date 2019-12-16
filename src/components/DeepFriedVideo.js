@@ -29,20 +29,20 @@ export default class extends Component {
   }
 
   stopVideo = () => {
-    this[`plyr-${this.props.mediaIdx}`].pauseVideo()
+    if (this[`plyr-${this.props.mediaIdx}`] !== undefined) this[`plyr-${this.props.mediaIdx}`].pauseVideo()
 
     this.setState({
       isPlaying: false
     })
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    if (!prevProps.stopAll && this.props.stopAll) {
-      this.stopVideo()
+  componentDidMount() {
+    if (this.props.mediaIdx === 0) {
+      this.setUp()
     }
   }
 
-  componentDidMount() {
+  setUp = () => {
     if (window.YT === undefined) {
       const tag = document.createElement('script')
       tag.src = 'https://www.youtube.com/iframe_api'
@@ -76,6 +76,10 @@ export default class extends Component {
   }
 
   onPlayerReady = (ev) => {
+    this.refs.button.addEventListener('click', () => {
+      if(this[`plyr-${this.props.mediaIdx}`] !== undefined) this.handlePlay(this.props.mediaIdx)
+    })
+
     this.setState({
       loaded: true
     })
@@ -106,16 +110,26 @@ export default class extends Component {
     }
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.scrolled[this.props.mediaIdx] <= window.innerHeight * .5 && this[`plyr-${this.props.mediaIdx}`] === undefined) {
+      this.setUp()
+    }
+
+    if (!prevProps.stopAll && this.props.stopAll) {
+      this.stopVideo()
+    }
+  }
+
   render () {
     const {type, media, mediaIdx} = this.props
 
     return (
-      <div className='deep-fried--media-block'>
+      <div className='deep-fried--media-block' ref={this.props.blockRef}>
         <div className='deep-fried--media-name'>{media.title}</div>
         <div className='deep-fried--media-placeholder is-video' ref={this.props.plyrRef}>
           <div id={`plyr-${mediaIdx}`}></div>
           <img ref={`plyr-placeholder-${mediaIdx}`} src={`https://img.youtube.com/vi/${media[type].split('?v=')[1].split('&')[0]}/sddefault.jpg`}/>
-          <div className={css('deep-fried--media-play-btn', {'is-hidden': this.state.isPlaying, 'is-loaded': this.state.loaded })} onClick={ev => this.handlePlay(mediaIdx)}>
+          <div className={css('deep-fried--media-play-btn', {'is-hidden': this.state.isPlaying, 'is-loaded': this.state.loaded })} ref='button'>
             <svg width="100%" height="100%" viewBox="0 0 138 139" xmlns="http://www.w3.org/2000/svg">
               <circle cx="69" cy="69.8276" r="66" stroke="white" fill="transparent" strokeWidth="6"/>
               <path d="M53.5 42.9808L100 69.8276L53.5 96.6744L53.5 42.9808Z" stroke="white" fill="transparent" strokeWidth="5"/>

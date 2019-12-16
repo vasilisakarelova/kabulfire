@@ -11,7 +11,8 @@ const DeepFriedVideo = lazy(() => import('./DeepFriedVideo'))
 export default class extends Component {
   state = {
     isPlaying: [],
-    loaded: []
+    loaded: [],
+    scrolled: {}
   }
 
   stopAll = () => {
@@ -24,6 +25,25 @@ export default class extends Component {
     if(!prevProps.closeAll && this.props.closeAll) {
       this.stopAll()
     }
+  }
+
+  componentDidMount() {
+    this.pageRef.addEventListener('scroll', (ev) => {
+      const videos = Object.keys(this).filter(i => i.includes('plyr-block'))
+      let list = {}
+
+      videos.forEach((video, idx) => {
+        list = Object.assign({}, list, {
+          [idx]: this[video].getBoundingClientRect().top
+        })
+      })
+
+      this.setState(state => {
+        return {
+          scrolled: list
+        }
+      })
+    })
   }
 
   render () {
@@ -48,7 +68,14 @@ export default class extends Component {
                 if (type == 'video') {
                   return (
                     <Suspense fallback={<div className='loader'></div>} key={`deep-fried-${mediaIdx}`}>
-                      <DeepFriedVideo stopAll={this.state.forceStop} type={type} media={media} mediaIdx={mediaIdx} plyrRef={plyr => this[`plyr-wrap-${mediaIdx}`] = plyr} />
+                      <DeepFriedVideo
+                        scrolled={this.state.scrolled}
+                        stopAll={this.state.forceStop}
+                        type={type}
+                        media={media}
+                        mediaIdx={mediaIdx}
+                        blockRef={block => this[`plyr-block-${mediaIdx}`] = block}
+                        plyrRef={plyr => this[`plyr-wrap-${mediaIdx}`] = plyr} />
                     </Suspense>
                   )
                 } else if (type == 'image') {
