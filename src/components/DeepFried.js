@@ -51,9 +51,6 @@ export default class extends Component {
 
     return (
       <Page name='-deep-fried' match={this.props.match} pageRef={el => this.pageRef = el}>
-        <Helmet>
-          <title>Kabulfire | DeepFried</title>
-        </Helmet>
         <div className='container'>
           <div className='container-logo--wrap'>
             <svg className='container-logo' width="100%" height="100%" viewBox="0 0 171 248" fill="none" xmlns="http://www.w3.org/2000/svg">

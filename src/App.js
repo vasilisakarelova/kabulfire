@@ -34,6 +34,7 @@ export default class App extends Component {
       prevPath = currentLocation.pathname
 
       if (currentLocation.pathname === '/deep-fried') {
+        document.title = 'Kabulfire | DeepFried'
         window.MARQUEES[2].paused = true
         window.MARQUEES[1].paused = false
         window.MARQUEES[0].paused = false
@@ -42,6 +43,7 @@ export default class App extends Component {
           isError: false
         })
       } else if (currentLocation.pathname === '/publishing') {
+        document.title = 'Kabulfire | Publishing'
         window.MARQUEES[2].paused = false
         window.MARQUEES[1].paused = true
         window.MARQUEES[0].paused = false
@@ -50,6 +52,7 @@ export default class App extends Component {
           isError: false
         })
       } else if (currentLocation.pathname === '/records') {
+        document.title = 'Kabulfire | Records'
         window.MARQUEES[2].paused = false
         window.MARQUEES[1].paused = false
         window.MARQUEES[0].paused = true

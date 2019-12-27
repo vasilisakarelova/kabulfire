@@ -57,9 +57,6 @@ export default class extends Component {
 
     return (
       <Page name='-records' pageRef={el => this.pageRef = el}>
-        <Helmet>
-          <title>Kabulfire | Records</title>
-        </Helmet>
         <div className='container'>
           { this.state.showClickHint &&
             <div className={css('hint--click', 'is-mob', {'is-hidden': !this.props.showClickHint})}>
